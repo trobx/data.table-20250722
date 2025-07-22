@@ -31,7 +31,7 @@
   Heuristically speaking, the \emph{join-from} table searches the \emph{join-to} table. More precisely:
   \itemize{
     \item{ \code{mult} determines the policy when a row of \emph{join-from} finds multiple matches in \emph{join-to}. }
-    \item{ When \code{on} is missing, the key of \emph{join-to} is used as the join column(s). }
+    \item{ When \code{on} is missing, the join column(s) are determined by the key of \emph{join-to}. }
   }
   Whether each refers to the "left" or "right" table of a pair depends on the \code{how} argument:
   \enumerate{
