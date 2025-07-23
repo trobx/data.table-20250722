@@ -52,7 +52,7 @@
 
   Symmetrical \emph{join-from}/\emph{join-to} treatment of \emph{LHS} and \emph{RHS} when \code{how \%in\% c("inner", "full")} is as follows:
   \itemize{
-    \item{ When \code{mult \%in\% c("first", "last", "error")}, then at distinct each value of the join column(s) the rows joined are respectively first-to-first, last-to-last, and only-to-only (or else an error). }
+    \item{ When \code{mult \%in\% c("first", "last", "error")}, then (respectively) the first, last, or only matching row on each side binds with the same on the other (and hence the merge is one-to-one). }
     \item{ If only one table has a key, then this key is used; if both tables have keys, then \code{on = intersect(key(lhs), key(rhs))}, having its order aligned to the shorter key. }
   }
 
