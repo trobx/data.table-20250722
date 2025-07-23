@@ -37,7 +37,7 @@
   \enumerate{
     \item{ \code{how \%in\% c("left", "semi", "anti")}: \emph{join-from} is \emph{LHS}, \emph{join-to} is \emph{RHS}. }
     \item{ \code{how == "right"}: \emph{join-from} is \emph{RHS}, \emph{join-to} is \emph{LHS}. }
-    \item{ \code{how \%in\% c("inner", "full")}: \emph{LHS} and \emph{RHS} are treated equally, so that the \emph{join-from}/\emph{join-to} designation is not so instructive. }
+    \item{ \code{how \%in\% c("inner", "full")}: \emph{LHS} and \emph{RHS} are treated equally, so that each is both \emph{join-from} and \emph{join-to}. }
     \item{ \code{how == "cross"}: \code{mult} must be \code{"all"} and \code{on} is not used, so the terms are not relevant. }
   }
 
