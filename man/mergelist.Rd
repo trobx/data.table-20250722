@@ -37,8 +37,14 @@
   \enumerate{
     \item{ \code{how \%in\% c("left", "semi", "anti")}: \emph{join-from} is \emph{LHS}, \emph{join-to} is \emph{RHS}. }
     \item{ \code{how == "right"}: \emph{join-from} is \emph{RHS}, \emph{join-to} is \emph{LHS}. }
-    \item{ \code{how \%in\% c("inner", "full")}: \emph{LHS} and \emph{RHS} are treated equally, so that each is both \emph{join-from} and \emph{join-to}. }
+    \item{ \code{how \%in\% c("inner", "full")}: \emph{LHS} and \emph{RHS} are treated symmetrically, so that each is both \emph{join-from} and \emph{join-to}; see below. }
     \item{ \code{how == "cross"}: \code{mult} must be \code{"all"} and \code{on} is not used, so the terms are not relevant. }
+  }
+
+  In Case 3, the symmetry is as follows:
+  \itemize{
+    \item{ When \code{mult \%in\% c("first", "last", "error")}, then (respectively) the first, last, or only matching row on each side binds with the same on the other. \code{mult} is satisfied mutually and the merge is one-to-one. }
+    \item{ If only one table has a key, then this key is used; if both tables have keys, then \code{on = intersect(key(lhs), key(rhs))}, having its order aligned to the shorter key. }
   }
 
   Using \code{mult="error"} will throw an error when a row in the \emph{join-from} table finds multiple matching rows in the \emph{join-to} table. It should not be used just to detect duplicates in \emph{join-to}, as these might not have a matching row in \emph{join-from}, and thus silently be missed.
@@ -48,12 +54,6 @@
     \item{ When \code{how \%in\% c("left", "inner", "full", "right")}, \code{mult="error"}. }
     \item{ When \code{how \%in\% c("semi", "anti")}, \code{mult="last"}, although this is equivalent to \code{mult="first"}. }
     \item{ When \code{how == "cross"}, \code{mult="all"}. }
-  }
-
-  Symmetrical \emph{join-from}/\emph{join-to} treatment of \emph{LHS} and \emph{RHS} when \code{how \%in\% c("inner", "full")} is as follows:
-  \itemize{
-    \item{ When \code{mult \%in\% c("first", "last", "error")}, then (respectively) the first, last, or only matching row on each side binds with the same on the other (and hence the merge is one-to-one). }
-    \item{ If only one table has a key, then this key is used; if both tables have keys, then \code{on = intersect(key(lhs), key(rhs))}, having its order aligned to the shorter key. }
   }
 
   When joining tables that are not directly linked to a single table, e.g. a snowflake schema (see References), a \emph{right} outer join can be used to optimize the sequence of merges, see Examples.
